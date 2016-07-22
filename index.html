@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Docker in production</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Docker in production</h1>
+					<h2>Tomáš Tomeček</h2>
+				</section>
+
+				<section>
+					<h2>This talk is <b>NOT</b> about</h2>
+					<ul>
+						<li class="fragment">Talking about an existing deployment using docker</li>
+						<li class="fragment">Presenting experience with docker in production</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>This talk <b>IS</b> about</h2>
+					<ul>
+						<li class="fragment">Steps needed for using containers</li>
+						<li class="fragment">Expectations</li>
+						<li class="fragment">Current state of docker ecosystem</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>This talk is presented by...</h2>
+					<ul>
+						<li class="fragment">This guy</li>
+						<li class="fragment"><strike>Ops</strike> Engineer</li>
+						<li class="fragment">Docker project contributor</li>
+						<li class="fragment">Container fanboy</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Steps needed for using containers</h2>
+				</section>
+
+				<section>
+					<h2>Steps needed for using containers</h2>
+					<ol>
+						<li class="fragment">Build</li>
+						<li class="fragment">Distribute</li>
+						<li class="fragment">Deploy</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Build</h2>
+					<ul>
+						<li class="fragment">Containerize the application
+							<ul>
+								<li class="fragment">Produce Dockerfile and <code>run</code> instructions</li>
+								<li class="fragment">Usually easy</li>
+								<li class="fragment">Except when it's not</li>
+								<li class="fragment">Graphical applications, hardware devices, unusual kernel features...</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Build (2)</h2>
+					<ul>
+						<li class="fragment">Create an image
+							<ul>
+								<li class="fragment">This can be hard</li>
+								<li class="fragment">Layer management (squashing)</li>
+								<li class="fragment">Build-time secrets</li>
+								<li class="fragment">And more... (see my DevConf talk)</li>
+							</ul>
+						</li>
+						<li class="fragment">Image content</li>
+						<li class="fragment">Hierarchy</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Distribute</h2>
+					<ul>
+						<li class="fragment">As an archive</li>
+						<li class="fragment">Via shared storage</li>
+						<li class="fragment">Using Docker registry protocol</li>
+						<li class="fragment">Naming scheme</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Deploy</h2>
+					<ul>
+						<li class="fragment" data-fragment-index="1"><span class="fragment strike" data-fragment-index="2">The easiest one</span><span class="fragment" data-fragment-index="2"> Just kidding<span></li>
+						<li class="fragment">Version of docker engine matters</li>
+						<li class="fragment">Single node setup</li>
+						<li class="fragment">Multi node setup</li>
+						<li class="fragment">Orchestrator
+							<ul>
+								<li class="fragment">Managing the service</li>
+								<li class="fragment">Networking</li>
+								<li class="fragment">Storage</li>
+								<li class="fragment">(Rolling) updates</li>
+								<li class="fragment">Monitoring</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Quick recap</h2>
+					<ul>
+						<li class="fragment">Workflow</li>
+						<li class="fragment">Base Images</li>
+						<li class="fragment">CI / CD</li>
+						<li class="fragment">Orchestrator pick</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Expectations</h2>
+				</section>
+
+				<section>
+					<h2>Expectations — the good</h2>
+					<ul>
+						<li class="fragment">Unified environment</li>
+						<li class="fragment">Everything automated</li>
+						<li class="fragment">Everything is tracked</li>
+						<li class="fragment">You are control</li>
+					</ul>
+				</section>
+
+				<section>
+					<p><i>Release with <code>git tag</code>, then sit back, relax and your beer.</i></p>
+				</section>
+
+				<section>
+					<h2>Expectations — the bad</h2>
+					<ul>
+						<li class="fragment">New type if infrastructure</li>
+						<li class="fragment">Cryptic bugs</li>
+						<li class="fragment">Hard to reproduce bugs</li>
+						<li class="fragment">Unfixed bugs</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>State of the art</h2>
+				</section>
+
+
+				<section>
+					<h2>Further reading</h2>
+				/var/lib/docker on NFS https://github.com/docker/docker/issues/22539#issuecomment-217316284
+				</section>
+
+
+
+				<section>
+					<h2>https://github.com/TomasTomecek/flock2016-talk</h2>
+					<h2 class="fragment">Questions are welcome</h2>
+
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				slideNumber: true,
+				transition: 'none',
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
