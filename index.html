@@ -40,7 +40,7 @@
 				<section>
 					<h2>This talk <b>IS</b> about</h2>
 					<ul>
-						<li class="fragment">Steps needed for using containers</li>
+						<li class="fragment">Steps needed for using containers in production</li>
 						<li class="fragment">Expectations</li>
 						<li class="fragment">Current state of docker ecosystem</li>
 					</ul>
@@ -63,9 +63,9 @@
 				<section>
 					<h2>Steps needed for using containers</h2>
 					<ol>
-						<li class="fragment">Build</li>
-						<li class="fragment">Distribute</li>
-						<li class="fragment">Deploy</li>
+						<li>Build</li>
+						<li>Distribute</li>
+						<li>Deploy</li>
 					</ol>
 				</section>
 
@@ -74,10 +74,10 @@
 					<ul>
 						<li class="fragment">Containerize the application
 							<ul>
-								<li class="fragment">Produce Dockerfile and <code>run</code> instructions</li>
+								<li class="fragment">Produce Dockerfile and <code>run</code> arguments</li>
 								<li class="fragment">Usually easy</li>
 								<li class="fragment">Except when it's not</li>
-								<li class="fragment">Graphical applications, hardware devices, unusual kernel features...</li>
+								<li class="fragment">Graphical applications, hardware devices, esoteric kernel features...</li>
 							</ul>
 						</li>
 					</ul>
@@ -86,6 +86,7 @@
 				<section>
 					<h2>Build (2)</h2>
 					<ul>
+						<li>Image content</li>
 						<li class="fragment">Create an image
 							<ul>
 								<li class="fragment">This can be hard</li>
@@ -94,7 +95,6 @@
 								<li class="fragment">And more... (see my DevConf talk)</li>
 							</ul>
 						</li>
-						<li class="fragment">Image content</li>
 						<li class="fragment">Hierarchy</li>
 					</ul>
 				</section>
@@ -105,7 +105,7 @@
 						<li class="fragment">As an archive</li>
 						<li class="fragment">Via shared storage</li>
 						<li class="fragment">Using Docker registry protocol</li>
-						<li class="fragment">Naming scheme</li>
+						<li class="fragment">Figure out naming scheme</li>
 					</ul>
 				</section>
 
@@ -146,23 +146,22 @@
 					<h2>Expectations — the good</h2>
 					<ul>
 						<li class="fragment">Unified environment</li>
-						<li class="fragment">Everything automated</li>
+						<li class="fragment">Everything is automated</li>
 						<li class="fragment">Everything is tracked</li>
-						<li class="fragment">You are control</li>
+						<li class="fragment">You are in control</li>
 					</ul>
 				</section>
 
 				<section>
-					<p><i>Release with <code>git tag</code>, then sit back, relax and your beer.</i></p>
+					<p><i>Release with <code>git tag</code>, then sit back, relax and enjoy your beer.</i></p>
 				</section>
 
 				<section>
 					<h2>Expectations — the bad</h2>
 					<ul>
 						<li class="fragment">New type of infrastructure</li>
-						<li class="fragment">Cryptic bugs</li>
-						<li class="fragment">Hard to reproduce bugs</li>
-						<li class="fragment">Unfixed bugs</li>
+						<li class="fragment">New experience, new skills</li>
+						<li class="fragment">Evolves quickly</li>
 					</ul>
 				</section>
 
@@ -171,42 +170,110 @@
 				</section>
 
 				<section>
-					<h2>Containers don't matter</h2>
-					TODO: add quote
+					<h2>“Nobody cares about containers.”</h2>
+					<p>Solomon Hykes, CTO of Docker Inc.</p>
+					<p>Dockercon 2016, Keynote, day 1</p>
 				</section>
 
 				<section>
-					<h2>TBD</h2>
-					<ul>
-						<li class="fragment" data-fragment-index="1">
-							<span class="fragment strike" data-fragment-index="2">Technology</span>
-							<span class="fragment" data-fragment-index="3">Platform</span>
-						</li>
-					</ul>
+					<h2>
+						<span class="fragment strike" data-fragment-index="1">Technology</span>
+						<span class="fragment" data-fragment-index="1">Platform</span>
+					</h2>
 				</section>
 
 				<section>
 					<h2>docker 1.12</h2>
 					<ul>
-						<li><code>swarm</code> mode</li>
-						<li><code>stack</code> and <code>deploy</code>: multi-container applications</li>
-						<li>New <code>HEALTHCHECK</code> instruction</li>
-						<li><code>docker</code> client binary and <code>dockerd</code> daemon</li>
-						<li><code>--live-restore</code> daemon flag:
+						<li class="fragment">Built-in orchestration</li>
+						<li class="fragment">Service API</li>
+						<li class="fragment">Distributed application bundle — multi-container applications</li>
+						<li class="fragment">New <code>HEALTHCHECK</code> instruction</li>
+						<li class="fragment"><code>--live-restore</code> daemon flag</li>
+						<li class="fragment"><code>docker</code> client binary and <code>dockerd</code> daemon</li>
 					</ul>
+					<aside class="notes">
+						<ul>
+							<li>swarm: optional, backwards compat, no overhead</li>
+							<li>swarm: Linux IPVS</li>
+							<li>dab: build on top of services</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Let's talk stability & issues now</h2>
+					<ul>
+						<li>80/20</li>
+						<li>Lots of code changes</li>
+						<li>Releases every 2-3 months
+							<ul>
+								<li>with minor releases after a major one</li>
+							</ul>
+						</li>
+						<li>May be hard to reproduce</li>
+						<li>And even harder to fix</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Let's talk stability & issues now (2)</h2>
+					<ul>
+						<li>Docker Daemon Hangs under load - <em>#13885</em></li>
+						<li>[1.11.0] Possible deadlock on container object <em>#22124</em></li>
+						<li>DNS queries sometimes get stuck since upgrading to 1.11.0 <em>#22185</em></li>
+						<li>Internet connectivity drops in random container. <em>#22144</em></li>
+						<li>Sometimes the device mapper is stuck in an infinite “mount/remount” loop <em>#20401</em></li>
+						<li>Docker build that fails with overlay storage backend only? <em>#12327</em></li>
+						<li>Overlayfs does not work with unix domain sockets <em>#12080</em></li>
+						<li>"device or resource busy"</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>lots of related issues that all API calls are locked</li>
+							<li>Open Since June 11th, 2015; 127 comments</li>
+							<li>dns - 81 comments</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ul>
+						<li class="fragment">Docker engine has won containers</li>
+						<li class="fragment">Orchestration battle has begun</li>
+						<li class="fragment">Pick your platform</li>
+						<li class="fragment">Open Container Initiative</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li></li>
+						</ul>
+					</aside>
 				</section>
 
 				<section>
 					<h2>Further reading</h2>
-				/var/lib/docker on NFS https://github.com/docker/docker/issues/22539#issuecomment-217316284
+					<ul>
+						<li><a href=https://github.com/docker/docker/issues/22539#issuecomment-217316284">/var/lib/docker on NFS</a></li>
+						<li><a href=https://youtu.be/vE1iDPx6-Ok">Dockercon 2016 Keynote Day 1</a></li>
+						<li><a href=https://blog.docker.com/2016/06/docker-app-bundle/">Distributed Application Bundles</a></li>
+						<li><a href=https://docs.docker.com/engine/swarm/swarm-tutorial/deploy-service/">Deploy a service</a></li>
+						<li><a href=https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/">Docker 1.12 blog post</a></li>
+						<li><a href=https://github.com/docker/docker/blob/master/experimental/docker-stacks-and-bundles.md">Docker stacks and bundles</a></li>
+						<li><a href=http://blog.hashbangbash.com/2014/11/docker-devicemapper-fix-for-device-or-resource-busy-ebusy/">docker: devicemapper fix for “device or resource busy” (EBUSY)</a></li>
+					</ul>
 				</section>
 
-
-
 				<section>
-					<h2>https://github.com/TomasTomecek/flock2016-talk</h2>
-					<h2 class="fragment">Questions are welcome</h2>
-
+					<h2>Questions are welcome!</h2>
+					<p>github.com/TomasTomecek/flock2016-talk</p>
+					<p>@TomasTomec</p>
 				</section>
 
 			</div>
