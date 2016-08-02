@@ -28,14 +28,16 @@
 			<div class="slides">
 				<section>
 					<h1>Docker in production</h1>
-					<h2>Tomáš Tomeček</h2>
+					<p>
+					<em>Tomáš Tomeček</em> <br> <em>Red Hat</em>
+					</p>
 				</section>
 
 				<section>
 					<h2>This talk is <b>NOT</b> about</h2>
 					<ul>
-						<li class="fragment">Talking about an existing deployment</li>
-						<li class="fragment">Presenting experience with docker in production</li>
+						<li class="fragment">A success story</li>
+						<li class="fragment">Showing our production cluster</li>
 					</ul>
 				</section>
 
@@ -46,6 +48,10 @@
 						<li class="fragment">Expectations</li>
 						<li class="fragment">Current state of docker ecosystem</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>This talk is about how to make success stories</h2>
 				</section>
 
 				<section>
@@ -76,7 +82,8 @@
 					<ul>
 						<li class="fragment">Containerize the application
 							<ul>
-								<li class="fragment">Produce Dockerfile and <code>run</code> arguments</li>
+								<li class="fragment">Produce Dockerfile</li>
+								<li class="fragment">Figure out container runtime options</li>
 								<li class="fragment">Usually easy</li>
 								<li class="fragment">Except when it's not</li>
 								<li class="fragment">Graphical applications, hardware devices, esoteric kernel features...</li>
@@ -88,7 +95,7 @@
 				<section>
 					<h2>Build (2)</h2>
 					<ul>
-						<li>Image content</li>
+						<li>Image content matters (Honza Horak says)</li>
 						<li class="fragment">Create an image
 							<ul>
 								<li class="fragment">Easy</li>
@@ -106,7 +113,7 @@
 					<h2>Distribute</h2>
 					<ul>
 						<li class="fragment">As an archive</li>
-						<li class="fragment">Via shared storage</li>
+						<li class="fragment">Via shared storage (gh.com/containers/storage)</li>
 						<li class="fragment">Using Docker registry protocol</li>
 						<li class="fragment">Figure out naming scheme</li>
 					</ul>
@@ -156,7 +163,8 @@
 				</section>
 
 				<section>
-					<p><i>Release with <code>git tag</code>, then sit back, relax and enjoy your beer.</i></p>
+					<p><code>git tag && git push --tags</code></p>
+					<p class="fragment">Then sit back, relax and enjoy your beer.</i></p>
 				</section>
 
 				<section>
@@ -169,6 +177,7 @@
 					</ul>
 					<aside class="notes">
 						<ul>
+							<li>previously: bare metal and VMs, has own automation, can't be used for containers</li>
 							<li>consequence</li>
 						</ul>
 					</aside>
@@ -180,7 +189,7 @@
 
 				<section>
 					<h2>“Nobody cares about containers.”</h2>
-					<p>Solomon Hykes, CTO of Docker Inc.</p>
+					<p>Solomon Hykes, CTO of Docker, Inc</p>
 					<p>Dockercon 2016, Keynote, day 1</p>
 				</section>
 
@@ -189,6 +198,11 @@
 						<span class="fragment strike" data-fragment-index="1">Technology</span>
 						<span class="fragment" data-fragment-index="1">Platform</span>
 					</h2>
+					<aside class="notes">
+						<ul>
+							<li>Let's check the platform</li>
+						</ul>
+					</aside>
 				</section>
 
 				<section>
@@ -200,6 +214,7 @@
 						<li class="fragment">New <code>HEALTHCHECK</code> instruction</li>
 						<li class="fragment"><code>--live-restore</code> daemon flag</li>
 						<li class="fragment"><code>docker</code> client binary and <code>dockerd</code> daemon</li>
+						<li class="fragment">Available in Fedora rawhide!!1!</li>
 					</ul>
 					<aside class="notes">
 						<ul>
@@ -257,6 +272,7 @@
 						<li class="fragment">Docker engine has won containers</li>
 						<li class="fragment">Orchestration battle has begun</li>
 						<li class="fragment">Pick your platform</li>
+						<li class="fragment">Educate yourself</li>
 						<li class="fragment">Open Container Initiative</li>
 					</ul>
 					<aside class="notes">
